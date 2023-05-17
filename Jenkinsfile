@@ -10,11 +10,13 @@ pipeline {
             steps{
                 git branch: 'main', credentialsId: 'git', url: 'https://github.com/kenchedda/mrdevops.git'
             }
+        }
         stage( 'Unit Test'){
             steps{
                 sh 'mvn test'
 
             }
+        }
         stage('integration test'){
             steps{
                 sh 'mvn verify -Dmaven.test.skip=true'
@@ -43,6 +45,5 @@ pipeline {
 
     }
 
-    }
     
-}
+    
