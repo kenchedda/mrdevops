@@ -30,14 +30,18 @@ pipeline {
                 sh 'mvn clean install'
             }
         }
-        stage('Static code analysis'){
-            steps{
-                script{
-            withSonarQubeEnv(credentialsId: 'mrdevops') {          
-                sh 'mvn clean package sonar:sonar'
+       stage ("Sonar Analysis") {
+            environment {
+               scannerHome = tool 'sonar'  //scanner name configured for slave 
             }
-        }
-           }    
+            steps {
+                echo '<--------------- Sonar Analysis started  --------------->'
+                withSonarQubeEnv('sonar') {    
+                    //sonarqube server name in master
+                    sh "${scannerHome}/bin/sonar-scanner"
+                }    
+                echo '<--------------- Sonar Analysis stopped  --------------->'
+            }   
         }
         stage('quality gate'){
             steps{
