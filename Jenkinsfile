@@ -30,34 +30,12 @@ pipeline {
                 sh 'mvn clean install'
             }
         }
-       stage ("Sonar Analysis") {
-            environment {
-               scannerHome = tool 'sonar'  //scanner name configured for slave 
+        stage('quality gate'){
+            steps{
+                waitForQualityGate abortPipeline: false, credentialsId: 'mrdevops'
             }
-            steps {
-                echo '<--------------- Sonar Analysis started  --------------->'
-                withSonarQubeEnv('sonar') {    
-                    //sonarqube server name in master
-                    sh "${scannerHome}/bin/sonar-scanner"
-                }    
-                echo '<--------------- Sonar Analysis stopped  --------------->'
-            }   
-        }
-         stage ("Quality Gate") {
 
-            steps {
-                script {
-                  echo '<--------------- Quality Gate started  --------------->' 
-                    timeout(time: 1, unit: 'HOURS') {
-                        def qg = waitForQualityGate()
-                        if(qg.status!='OK'){
-                          error "Pipeline failed due to the Quality gate issue"   
-                        }    
-                    }    
-                  echo '<--------------- Quality Gate stopped  --------------->'
-                }    
-            }   
-        }          
+        }    
         }
 
     }
