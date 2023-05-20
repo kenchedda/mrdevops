@@ -66,13 +66,15 @@ pipeline {
                         classifier: '', file: 'target/Uber.jar',
                          type: 'jar'
                          ]
-                         ]
-                         , credentialsId: 'nexus',
-                          groupId: 'com.example',
-                           nexusUrl: '18.209.172.31:8081',
-                            nexusVersion: 'nexus3',
-                             protocol: 'http', 
-                             repository: 'http://18.209.172.31:8081/repository/demowork/', version: '1.0.0'
+                         
+                         ],
+                        credentialsId: 'nexus',
+                        groupId: 'com.example',
+                        nexusUrl: '18.209.172.31:8081',
+                        nexusVersion: 'nexus3',
+                        protocol: 'http', 
+                        repository: 'http://18.209.172.31:8081/repository/demowork/', 
+                        version: '1.0.0'
                 }
             }
         }         
