@@ -68,7 +68,7 @@ pipeline {
                          type: 'jar'
                          ]
                          
-                         ],
+                    ],
                         credentialsId: 'nexus',
                         groupId: 'com.example',
                         nexusUrl: '18.209.172.31:8081',
