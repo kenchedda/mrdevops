@@ -80,6 +80,15 @@ pipeline {
                         protocol: 'http', 
                         repository: nexusRepo, 
                         version: "${readPomVersion.version}"
+
+                stage('Docker image build'){
+                    steps {
+                        script{
+                            sh 'docker image build -t $JOB_NAME:v1.$BUILD_ID .'
+                            sh 'docker image tag $JOB_NAME:v1.$BUILD_ID kenappiah/$JOB_NAME:latest'
+                        }
+                    }
+                }    
                 }
             }
         }         
