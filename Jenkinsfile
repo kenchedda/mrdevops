@@ -108,7 +108,7 @@ pipeline {
        steps {
          script {
             echo '<--------------- Helm Deploy Started --------------->'
-            sh 'helm delete java /home/ec2-user/java-0.1.0.tgz'
+            sh 'helm install java /home/ec2-user/home/ec2-user'
             echo '<--------------- Helm deploy Ends --------------->'
          }
        }
