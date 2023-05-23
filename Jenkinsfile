@@ -75,7 +75,7 @@ pipeline {
                     ],
                         credentialsId: 'nexus',
                         groupId: 'com.example',
-                        nexusUrl: '18.206.221.128:8081',
+                        nexusUrl: '3.87.137.55:8081',
                         nexusVersion: 'nexus3',
                         protocol: 'http', 
                         repository: nexusRepo, 
@@ -89,7 +89,7 @@ pipeline {
                     steps {
                         script {
                             sh 'docker image build -t $JOB_NAME:v1.$BUILD_ID .'
-                            sh 'docker image tag $JOB_NAME:v1.$BUILD_ID kenappiah/$JOB_NAME:latest'
+                            sh 'docker image tag $JOB_NAME:v1.$BUILD_ID kenappiah/$JOB_NAME:latest1'
                         }
                     }
             
@@ -99,7 +99,7 @@ pipeline {
                     script{
                         withCredentials([string(credentialsId: 'dockersec', variable: 'docker_hub_cred')]) {
                             sh 'docker login -u kenappiah -p ${docker_hub_cred}'
-                            sh 'docker image push kenappiah/$JOB_NAME:latest'
+                            sh 'docker image push kenappiah/$JOB_NAME:latest1'
                     }
                 }
             }                
